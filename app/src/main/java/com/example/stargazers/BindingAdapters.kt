@@ -6,6 +6,7 @@ import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.stargazers.model.User
 import com.example.stargazers.network.StargazersApiStatus
 import com.example.stargazers.network.UserNetworkEntity
 import com.example.stargazers.ui.mainpage.UserGridAdapter
@@ -26,7 +27,7 @@ fun bindImage(imageView: ImageView, imgUrl: String?) {
 
 // Bind Recyclerview to XML
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<UserNetworkEntity>?) {
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<User>?) {
     val adapter = recyclerView.adapter as UserGridAdapter
     adapter.submitList(data)
 }
