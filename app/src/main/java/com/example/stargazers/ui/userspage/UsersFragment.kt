@@ -1,4 +1,4 @@
-package com.example.stargazers.ui.mainpage
+package com.example.stargazers.ui.userspage
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.stargazers.R
 import com.example.stargazers.databinding.FragmentUsersBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +21,7 @@ class UsersFragment : Fragment() {
 
     private lateinit var binding: FragmentUsersBinding
 
-    private val viewModel: UsersViewModel by viewModels()
+    private val viewModel: UsersViewModel by activityViewModels()
 
 
 
@@ -39,10 +41,23 @@ class UsersFragment : Fragment() {
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
 
+
         // Initialize viewModel
         binding.viewModel = viewModel
 
-        binding.photosGrid.adapter = UserGridAdapter()
+//        binding.photosGrid.adapter = UserGridAdapter()
+
+        binding.photosGrid.adapter = UserGridAdapter(UserGridAdapter.OnClickListener {
+            viewModel.displayUserDetails(it)
+        })
+
+        viewModel.navigateToSelectedUser.observe(viewLifecycleOwner, Observer {
+            if ( null != it ) {
+                this.findNavController().navigate(
+                    UsersFragmentDirections.actionUsersFragmentToUserDetailsFragment(it))
+                viewModel.displayUserDetailsComplete()
+            }
+        })
 
         setHasOptionsMenu(true)
         return binding.root

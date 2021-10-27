@@ -1,14 +1,8 @@
-package com.example.stargazers.ui.mainpage
+package com.example.stargazers.ui.userspage
 
-import android.util.Log
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.stargazers.model.User
-import com.example.stargazers.network.StargazersApiStatus
-import com.example.stargazers.network.UserNetworkEntity
 import com.example.stargazers.repository.MainRepository
-import com.example.stargazers.util.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -19,15 +13,19 @@ import javax.inject.Inject
 class UsersViewModel
 @Inject
 constructor(
-    @Assisted private val savedStateHandle: SavedStateHandle,
+    private val savedStateHandle: SavedStateHandle,
     private val mainRepository: MainRepository
 ) : ViewModel() {
 
 
     private val _users: MutableLiveData<List<User>> = MutableLiveData()
-
     val users: LiveData<List<User>>
         get() = _users
+
+    private val _navigateToSelectedUser = MutableLiveData<User>()
+    val navigateToSelectedUser: LiveData<User>
+        get() = _navigateToSelectedUser
+
 
     init {
         getUserList()
@@ -41,6 +39,14 @@ constructor(
                     _users.value = users
                 }.launchIn(viewModelScope)
         }
+    }
+
+    fun displayUserDetails(user: User) {
+        _navigateToSelectedUser.value = user
+    }
+
+    fun displayUserDetailsComplete() {
+        _navigateToSelectedUser.value = null
     }
 
 

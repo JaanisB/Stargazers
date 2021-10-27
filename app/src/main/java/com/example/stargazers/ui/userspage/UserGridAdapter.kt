@@ -1,4 +1,4 @@
-package com.example.stargazers.ui.mainpage
+package com.example.stargazers.ui.userspage
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,9 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stargazers.databinding.GridViewItemBinding
 import com.example.stargazers.model.User
-import com.example.stargazers.network.UserNetworkEntity
 
-class UserGridAdapter : ListAdapter<User, UserGridAdapter.UserViewHolder>(DiffCallback) {
+class UserGridAdapter ( private val onClickListener: OnClickListener) : ListAdapter<User, UserGridAdapter.UserViewHolder>(DiffCallback) {
 
     inner class UserViewHolder (private var binding: GridViewItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(user: User) {
@@ -25,6 +24,9 @@ class UserGridAdapter : ListAdapter<User, UserGridAdapter.UserViewHolder>(DiffCa
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val user = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(user)
+        }
         holder.bind(user)
     }
 
@@ -36,6 +38,10 @@ class UserGridAdapter : ListAdapter<User, UserGridAdapter.UserViewHolder>(DiffCa
         override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
             return oldItem.id == newItem.id
         }
+    }
+
+    class OnClickListener(val clickListener: (user: User) -> Unit) {
+        fun onClick(user: User) = clickListener(user)
     }
 
 }

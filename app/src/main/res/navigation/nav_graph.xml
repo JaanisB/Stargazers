@@ -3,14 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/usersFragment">
+    app:startDestination="@id/mainpageFragment">
+
+    <fragment
+        android:id="@+id/mainpageFragment"
+        android:name="com.example.stargazers.ui.mainpage.MainpageFragment"
+        android:label="UserDetailsFragment" >
+        <action
+            android:id="@+id/action_userDetailsFragment_to_mainPageFragment"
+            app:destination="@id/usersFragment" />
+        <action
+            android:id="@+id/action_mainpageFragment_to_userDetailsFragment"
+            app:destination="@id/userDetailsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/usersFragment"
-        android:name="com.example.stargazers.ui.mainpage.UsersFragment"
+        android:name="com.example.stargazers.ui.userspage.UsersFragment"
         android:label="MainPageFragment" >
         <action
-            android:id="@+id/action_mainPageFragment_to_userDetailsFragment"
+            android:id="@+id/action_usersFragment_to_mainpageFragment"
+            app:destination="@id/mainpageFragment" />
+        <action
+            android:id="@+id/action_usersFragment_to_userDetailsFragment"
             app:destination="@id/userDetailsFragment" />
     </fragment>
 
@@ -19,8 +34,18 @@
         android:name="com.example.stargazers.ui.userdetails.UserDetailsFragment"
         android:label="UserDetailsFragment" >
         <action
-            android:id="@+id/action_userDetailsFragment_to_mainPageFragment"
+            android:id="@+id/action_userDetailsFragment_to_mainpageFragment"
+            app:destination="@id/mainpageFragment" />
+        <action
+            android:id="@+id/action_userDetailsFragment_to_usersFragment"
             app:destination="@id/usersFragment" />
+        <argument
+            android:name="selectedUser"
+            app:argType="com.example.stargazers.model.User"
+            />
+
     </fragment>
+
+
 
 </navigation>
