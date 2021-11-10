@@ -3,7 +3,10 @@ package com.example.stargazers.ui.userspage
 import androidx.lifecycle.*
 import com.example.stargazers.model.User
 import com.example.stargazers.repository.MainRepository
+import com.example.stargazers.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -17,6 +20,28 @@ constructor(
     private val mainRepository: MainRepository
 ) : ViewModel() {
 
+    sealed class UserEvent {
+        class Success (val resultUsers: List<User>) : UserEvent()
+        class Failure (val errorText: String) : UserEvent()
+        object Loading: UserEvent()
+        object Empty : UserEvent()
+    }
+
+    private val _userr = MutableStateFlow<UserEvent>(UserEvent.Empty)
+    val userr: StateFlow<UserEvent> = _userr
+
+
+    fun getUserList () {
+        viewModelScope.launch {
+            _userr.value = UserEvent.Loading
+
+            when (val userResponse = mainRepository.getUsers()) {
+                is Resource.Error -> _users.value = userResponse.data!!
+                is Resource.Success ->  _users.value = userResponse.data!!
+            }
+        }
+    }
+
 
     private val _users: MutableLiveData<List<User>> = MutableLiveData()
     val users: LiveData<List<User>>
@@ -29,17 +54,18 @@ constructor(
 
     init {
         getUserList()
+
     }
 
-    fun getUserList() {
+/*    fun getUserList() {
         viewModelScope.launch {
 
-            mainRepository.getUser()
+            mainRepository.getUsers()
                 .onEach { users ->
                     _users.value = users
                 }.launchIn(viewModelScope)
         }
-    }
+    }*/
 
     fun displayUserDetails(user: User) {
         _navigateToSelectedUser.value = user

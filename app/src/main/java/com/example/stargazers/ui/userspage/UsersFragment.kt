@@ -38,6 +38,7 @@ class UsersFragment : Fragment() {
         )
 
 
+
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
 
@@ -50,6 +51,8 @@ class UsersFragment : Fragment() {
         binding.photosGrid.adapter = UserGridAdapter(UserGridAdapter.OnClickListener {
             viewModel.displayUserDetails(it)
         })
+
+
 
         viewModel.navigateToSelectedUser.observe(viewLifecycleOwner, Observer {
             if ( null != it ) {

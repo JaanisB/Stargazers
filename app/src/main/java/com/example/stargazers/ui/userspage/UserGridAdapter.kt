@@ -41,7 +41,10 @@ class UserGridAdapter ( private val onClickListener: OnClickListener) : ListAdap
     }
 
     class OnClickListener(val clickListener: (user: User) -> Unit) {
-        fun onClick(user: User) = clickListener(user)
+        fun onClick(user: User) {
+            clickListener(user)
+        }
+
     }
 
 }
