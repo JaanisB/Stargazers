@@ -6,6 +6,7 @@ import com.example.stargazers.database.UserDao
 import com.example.stargazers.model.User
 import com.example.stargazers.network.UserRetrofit
 import com.example.stargazers.util.Resource
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(
@@ -15,6 +16,11 @@ class MainRepository @Inject constructor(
 
     override suspend fun getUsers(): Resource<List<User>> {
 
+        // Make delay for 1 second to see loading progress bar
+        Resource.Loading(null)
+        delay(1000)
+
+        //Try to get data from retrofit
         return try {
             val response = userRetrofit.getUsers()
             val result = response.body()
@@ -26,13 +32,11 @@ class MainRepository @Inject constructor(
                 }
                 Resource.Success(result)
             } else {
-                userDao.getUserList()
                 Resource.Error( userDao.getUserList(), response.message())
             }
 
 
         } catch (e: Exception) {
-            userDao.getUserList()
             Resource.Error( userDao.getUserList(), (e.message ?: "Error occurred, data loaded from Room Db"))
         }
     }

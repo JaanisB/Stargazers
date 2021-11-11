@@ -11,12 +11,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 
 import com.example.stargazers.R
 import com.example.stargazers.databinding.FragmentMainpageBinding
+import com.example.stargazers.ui.userspage.UsersFragmentDirections
 
 import com.example.stargazers.ui.userspage.UsersViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_mainpage.*
 
 
 @ExperimentalComposeUiApi
@@ -43,15 +46,37 @@ class MainpageFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.btnViewAllUsers.setOnClickListener {
-            Navigation.findNavController(binding.root).navigate(R.id.action_userDetailsFragment_to_mainPageFragment)
+            viewModel.getUserList()
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_userDetailsFragment_to_mainPageFragment)
         }
 
         // Observe ViewModel users and bind that data to dropdown menu
-        viewModel.users.observe(viewLifecycleOwner, Observer {
-            users -> binding.autoCompleteTextView.setAdapter(ArrayAdapter(requireContext(), R.layout.mainmenu_dropdown_item, users.map { it.login }) )
-            })
+        viewModel.users.observe(viewLifecycleOwner, Observer { users ->
+            binding.autoCompleteTextView.setAdapter(
+                ArrayAdapter(
+                    requireContext(),
+                    R.layout.mainmenu_dropdown_item,
+                    users.map {
+                        it.login
+                    })
+            )
+        }
+        )
 
 
+
+
+        // binding.autoCompleteTextView.setOnItemClickListener { adapterView, view, i, l ->  }
+
+        viewModel.navigateToSelectedUser.observe(viewLifecycleOwner, Observer {
+            if (null != it) {
+                this.findNavController().navigate(
+                    UsersFragmentDirections.actionUsersFragmentToUserDetailsFragment(it)
+                )
+                viewModel.displayUserDetailsComplete()
+            }
+        })
 
 
 

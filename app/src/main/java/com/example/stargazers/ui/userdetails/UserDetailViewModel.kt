@@ -17,7 +17,6 @@ class UserDetailViewModel(@Suppress("UNUSED_PARAMETER")user: User, app: Applicat
     init {
         _selectedUser.value = user
     }
-
 }
 
 
