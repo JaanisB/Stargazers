@@ -51,6 +51,11 @@ class MainpageFragment : Fragment() {
                 .navigate(R.id.action_userDetailsFragment_to_mainPageFragment)
         }
 
+        binding.btnSensorData.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_mainpageFragment_to_sensorsFragment)
+        }
+
         // Observe ViewModel users and bind that data to dropdown menu
         viewModel.users.observe(viewLifecycleOwner, Observer { users ->
             binding.autoCompleteTextView.setAdapter(
@@ -63,6 +68,10 @@ class MainpageFragment : Fragment() {
             )
         }
         )
+
+        binding.btnViewSelectedUser.setOnClickListener {
+            viewModel.getUserByLogin(binding.autoCompleteTextView.onItemClickListener.toString())
+        }
 
 
 

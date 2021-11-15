@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_mainpageFragment_to_userDetailsFragment"
             app:destination="@id/userDetailsFragment" />
+        <action
+            android:id="@+id/action_mainpageFragment_to_sensorsFragment"
+            app:destination="@id/sensorsFragment" />
     </fragment>
 
     <fragment
@@ -45,7 +48,15 @@
             />
 
     </fragment>
-
+    <fragment
+        android:id="@+id/sensorsFragment"
+        android:name="com.example.stargazers.ui.sensors.SensorsFragment"
+        android:label="fragment_sensors"
+        tools:layout="@layout/fragment_sensors" >
+        <action
+            android:id="@+id/action_sensorsFragment_to_mainpageFragment"
+            app:destination="@id/mainpageFragment" />
+    </fragment>
 
 
 </navigation>

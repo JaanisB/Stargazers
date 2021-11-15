@@ -31,7 +31,21 @@ constructor(
     val users: LiveData<List<User>>
         get() = _users
 
+    private val _user = MutableLiveData<User>()
+    val user: LiveData<User> = _user
 
+
+    // Get single user from repo
+    fun getUserByLogin(login: String) {
+        viewModelScope.launch {
+            _user.value = mainRepository.getUserbyName(login)
+            if (_user.value != null) {
+                _navigateToSelectedUser.value = _user.value
+            }
+        }
+    }
+
+    // Get all users from repo
     fun getUserList() {
         viewModelScope.launch {
             _userState.value = UserEvent.Loading
@@ -55,8 +69,6 @@ constructor(
             }
         }
     }
-
-
 
 
     private val _navigateToSelectedUser = MutableLiveData<User>()

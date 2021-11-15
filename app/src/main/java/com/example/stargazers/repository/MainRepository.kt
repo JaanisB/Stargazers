@@ -14,6 +14,8 @@ class MainRepository @Inject constructor(
     private val userRetrofit: UserRetrofit,
 ) : MainRepositoryInterface {
 
+
+    // Get all users from dB
     override suspend fun getUsers(): Resource<List<User>> {
 
         // Make delay for 1 second to see loading progress bar
@@ -39,5 +41,10 @@ class MainRepository @Inject constructor(
         } catch (e: Exception) {
             Resource.Error( userDao.getUserList(), (e.message ?: "Error occurred, data loaded from Room Db"))
         }
+    }
+
+    // get single user by its name from local room dB
+    override suspend fun getUserbyName(userName: String): User? {
+        return userDao.getUserbyName(userName)
     }
 }
