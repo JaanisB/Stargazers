@@ -73,9 +73,6 @@ class MainpageFragment : Fragment() {
             viewModel.getUserByLogin(binding.autoCompleteTextView.onItemClickListener.toString())
         }
 
-
-
-
         // binding.autoCompleteTextView.setOnItemClickListener { adapterView, view, i, l ->  }
 
         viewModel.navigateToSelectedUser.observe(viewLifecycleOwner, Observer {
@@ -86,6 +83,8 @@ class MainpageFragment : Fragment() {
                 viewModel.displayUserDetailsComplete()
             }
         })
+
+
 
 
 

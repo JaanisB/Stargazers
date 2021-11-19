@@ -9,4 +9,6 @@ class SensorsViewModel @Inject constructor(): ViewModel() {
 
     val randomText = "Test brightness level in different places"
 
+
+
 }

@@ -22,6 +22,8 @@ class MainRepository @Inject constructor(
         Resource.Loading(null)
         delay(1000)
 
+
+
         //Try to get data from retrofit
         return try {
             val response = userRetrofit.getUsers()

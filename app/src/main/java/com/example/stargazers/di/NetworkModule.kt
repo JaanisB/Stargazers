@@ -20,7 +20,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideGsonBuilder(): Moshi {
+    fun provideMoshiBuilder(): Moshi {
         return Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
             .build()

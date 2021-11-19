@@ -3,6 +3,7 @@ package com.example.stargazers.ui.userspage
 import androidx.lifecycle.*
 import com.example.stargazers.model.User
 import com.example.stargazers.repository.MainRepository
+import com.example.stargazers.repository.MainRepositoryInterface
 import com.example.stargazers.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

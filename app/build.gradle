@@ -110,7 +110,29 @@ dependencies {
     // Kotlin
     implementation("androidx.activity:activity-ktx:$activity_version")
 
+    // Ciruclar progressbar
     implementation('com.mikhaellopez:circularprogressbar:3.0.3')
+
+
+    // TESTING
+
+    // Dependencies for Android instrumented unit tests
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1") {
+        // conflicts with mockito due to direct inclusion of byte buddy
+        exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
+    }
+
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+
+    // Truth
+    androidTestImplementation "com.google.truth:truth:1.1.3"
+
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+
+
+
+
+
 
 
 }

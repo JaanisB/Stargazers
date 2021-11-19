@@ -30,7 +30,6 @@ class UserDetailsFragment : Fragment() {
             R.layout.fragment_user_details, container, false
         )
 
-        @Suppress("UNUSED_VARIABLE")
         val application = requireNotNull(activity).application
         binding.lifecycleOwner = this
         val user = UserDetailsFragmentArgs.fromBundle(requireArguments()).selectedUser

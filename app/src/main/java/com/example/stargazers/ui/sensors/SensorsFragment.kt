@@ -1,22 +1,17 @@
 package com.example.stargazers.ui.sensors
 
-import android.content.Context
 import android.content.Context.SENSOR_SERVICE
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.net.ConnectivityManager
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.ContextCompat.getSystemServiceName
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.stargazers.R
 import com.example.stargazers.databinding.FragmentSensorsBinding
@@ -97,6 +92,9 @@ class SensorsFragment : Fragment(), SensorEventListener {
         super.onPause()
         sensorManager.unregisterListener(this)
     }
+
+
+
 
 
 }

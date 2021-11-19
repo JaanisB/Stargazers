@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.stargazers.model.User
 
 
-class UserDetailViewModel(@Suppress("UNUSED_PARAMETER")user: User, app: Application) : AndroidViewModel(app) {
+class UserDetailViewModel(user: User, app: Application) : AndroidViewModel(app) {
 
     private val _selectedUser = MutableLiveData<User>()
     val selectedUser: LiveData<User>

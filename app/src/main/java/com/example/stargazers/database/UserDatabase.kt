@@ -13,6 +13,4 @@ abstract class UserDatabase: RoomDatabase() {
         val DATABASE_NAME: String = "user_db"
     }
 
-
-
 }
