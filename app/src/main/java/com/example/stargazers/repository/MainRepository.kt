@@ -18,11 +18,8 @@ class MainRepository @Inject constructor(
     // Get all users from dB
     override suspend fun getUsers(): Resource<List<User>> {
 
-        // Make delay for 1 second to see loading progress bar
+
         Resource.Loading(null)
-        delay(1000)
-
-
 
         //Try to get data from retrofit
         return try {

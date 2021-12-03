@@ -82,7 +82,7 @@ constructor(
     }
 
     fun displayUserDetailsComplete() {
-        _navigateToSelectedUser.value = null!!
+        _navigateToSelectedUser.value = null
     }
 }
 

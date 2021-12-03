@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/user_image"
@@ -34,7 +34,6 @@
             android:gravity="center"
             android:text="@{user.login}"
             app:layout_constraintBottom_toBottomOf="@+id/user_image"
-            app:layout_constraintEnd_toStartOf="@id/btn_details"
             app:layout_constraintStart_toEndOf="@id/user_image"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="user1" />

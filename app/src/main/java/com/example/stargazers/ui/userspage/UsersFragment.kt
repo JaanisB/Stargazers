@@ -22,7 +22,9 @@ import kotlinx.coroutines.flow.collect
 @AndroidEntryPoint
 class UsersFragment : Fragment() {
 
-    private lateinit var binding: FragmentUsersBinding
+    private var _binding: FragmentUsersBinding? = null
+    private val binding get() = _binding!!
+
 
     private val viewModel: UsersViewModel by activityViewModels()
 
@@ -35,10 +37,16 @@ class UsersFragment : Fragment() {
     ): View? {
 
         // Initialize binding
-        binding = DataBindingUtil.inflate(
+        _binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_users, container, false
         )
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launchWhenCreated {
             viewModel.userState.collect { userState ->
@@ -59,7 +67,7 @@ class UsersFragment : Fragment() {
 
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
 
         // Initialize viewModel
@@ -81,6 +89,11 @@ class UsersFragment : Fragment() {
         })
 
         setHasOptionsMenu(true)
-        return binding.root
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

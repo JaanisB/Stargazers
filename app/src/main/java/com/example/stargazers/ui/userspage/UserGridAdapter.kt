@@ -13,13 +13,16 @@ class UserGridAdapter ( private val onClickListener: OnClickListener) : ListAdap
     inner class UserViewHolder (private var binding: GridViewItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(user: User) {
             binding.user = user
+            binding.btnDetails.setOnClickListener {
+                onClickListener.onClick(user)
+            }
             binding.executePendingBindings()
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder(GridViewItemBinding.inflate(
-            LayoutInflater.from(parent.context)))
+            LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
@@ -27,6 +30,7 @@ class UserGridAdapter ( private val onClickListener: OnClickListener) : ListAdap
         holder.itemView.setOnClickListener {
             onClickListener.onClick(user)
         }
+
         holder.bind(user)
     }
 
@@ -48,3 +52,4 @@ class UserGridAdapter ( private val onClickListener: OnClickListener) : ListAdap
     }
 
 }
+

@@ -9,24 +9,21 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-
 import com.example.stargazers.R
 import com.example.stargazers.databinding.FragmentMainpageBinding
 import com.example.stargazers.ui.userspage.UsersFragmentDirections
-
 import com.example.stargazers.ui.userspage.UsersViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_mainpage.*
 
 
 @ExperimentalComposeUiApi
 @AndroidEntryPoint
 class MainpageFragment : Fragment() {
 
-    private lateinit var binding: FragmentMainpageBinding
+    private var _binding: FragmentMainpageBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel: UsersViewModel by activityViewModels()
 
@@ -37,13 +34,18 @@ class MainpageFragment : Fragment() {
     ): View? {
 
         // Initialize binding
-        binding = DataBindingUtil.inflate(
+        _binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_mainpage, container, false
         )
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         binding.btnViewAllUsers.setOnClickListener {
             viewModel.getUserList()
@@ -57,7 +59,7 @@ class MainpageFragment : Fragment() {
         }
 
         // Observe ViewModel users and bind that data to dropdown menu
-        viewModel.users.observe(viewLifecycleOwner, Observer { users ->
+        viewModel.users.observe(viewLifecycleOwner, { users ->
             binding.autoCompleteTextView.setAdapter(
                 ArrayAdapter(
                     requireContext(),
@@ -75,7 +77,7 @@ class MainpageFragment : Fragment() {
 
         // binding.autoCompleteTextView.setOnItemClickListener { adapterView, view, i, l ->  }
 
-        viewModel.navigateToSelectedUser.observe(viewLifecycleOwner, Observer {
+        viewModel.navigateToSelectedUser.observe(viewLifecycleOwner, {
             if (null != it) {
                 this.findNavController().navigate(
                     UsersFragmentDirections.actionUsersFragmentToUserDetailsFragment(it)
@@ -84,11 +86,12 @@ class MainpageFragment : Fragment() {
             }
         })
 
-
-
-
-
-        return binding.root
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
 
 }
