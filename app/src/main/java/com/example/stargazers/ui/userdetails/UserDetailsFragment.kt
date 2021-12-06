@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.example.stargazers.R
 import com.example.stargazers.databinding.FragmentUserDetailsBinding
 import com.example.stargazers.databinding.FragmentUsersBinding
@@ -19,6 +22,7 @@ class UserDetailsFragment : Fragment() {
     private var _binding: FragmentUserDetailsBinding? = null
     private val binding get() = _binding!!
 
+    private val viewmodel: UserDetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,11 +42,9 @@ class UserDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val application = requireNotNull(activity).application
+
         binding.lifecycleOwner = viewLifecycleOwner
-        val user = UserDetailsFragmentArgs.fromBundle(requireArguments()).selectedUser
-        val viewModelFactory = UserDetailViewModelFactory(user, application)
-        binding.viewModel = ViewModelProvider(this, viewModelFactory).get(UserDetailViewModel::class.java)
+        binding.viewModel = viewmodel
 
     }
 

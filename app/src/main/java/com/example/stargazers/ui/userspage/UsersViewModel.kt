@@ -28,12 +28,18 @@ constructor(
     private val _userState = MutableStateFlow<UserEvent>(UserEvent.Empty)
     val userState: StateFlow<UserEvent> = _userState
 
+
     private val _users: MutableLiveData<List<User>> = MutableLiveData()
     val users: LiveData<List<User>>
         get() = _users
 
     private val _user = MutableLiveData<User>()
     val user: LiveData<User> = _user
+
+    // Variable for navigation to selected user
+    private val _navigateToSelectedUser = MutableLiveData<User>()
+    val navigateToSelectedUser: LiveData<User>
+        get() = _navigateToSelectedUser
 
 
     // Get single user from repo
@@ -72,11 +78,7 @@ constructor(
     }
 
 
-    private val _navigateToSelectedUser = MutableLiveData<User>()
-    val navigateToSelectedUser: LiveData<User>
-        get() = _navigateToSelectedUser
-
-
+    // Function which will be passed as argument for OnClickListener object instance constructor function
     fun displayUserDetails(user: User) {
         _navigateToSelectedUser.value = user
     }

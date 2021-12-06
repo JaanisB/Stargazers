@@ -75,6 +75,7 @@ class UsersFragment : Fragment() {
 
 //        binding.photosGrid.adapter = UserGridAdapter()
 
+        // Instantiating Usergrid adapter and passing function as parameter for OnClickListener
         binding.photosGrid.adapter = UserGridAdapter(UserGridAdapter.OnClickListener {
             viewModel.displayUserDetails(it)
         })
