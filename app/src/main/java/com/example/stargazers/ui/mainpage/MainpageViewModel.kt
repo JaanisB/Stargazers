@@ -1,9 +1,6 @@
 package com.example.stargazers.ui.mainpage
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.example.stargazers.model.User
 import com.example.stargazers.repository.MainRepository
 import com.example.stargazers.ui.userspage.UsersViewModel
@@ -12,6 +9,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -19,12 +17,8 @@ import javax.inject.Inject
 class MainpageViewModel
 @Inject
 constructor(
-    private val savedStateHandle: SavedStateHandle,
-    private val mainRepository: MainRepository
+mainRepository: MainRepository
 ) : ViewModel() {
-
-
-
 
 
 

@@ -9,15 +9,22 @@
         android:id="@+id/mainpageFragment"
         android:name="com.example.stargazers.ui.mainpage.MainpageFragment"
         android:label="UserDetailsFragment" >
-        <action
-            android:id="@+id/action_userDetailsFragment_to_mainPageFragment"
-            app:destination="@id/usersFragment" />
+
         <action
             android:id="@+id/action_mainpageFragment_to_userDetailsFragment"
             app:destination="@id/userDetailsFragment" />
         <action
             android:id="@+id/action_mainpageFragment_to_sensorsFragment"
             app:destination="@id/sensorsFragment" />
+        <action
+            android:id="@+id/action_mainpageFragment_to_usersFragment"
+            app:destination="@id/usersFragment" />
+        <action
+            android:id="@+id/action_mainpageFragment_to_serviceFragment"
+            app:destination="@id/serviceFragment" />
+        <action
+            android:id="@+id/action_mainpageFragment_to_contactsFragment"
+            app:destination="@id/contactsFragment" />
     </fragment>
 
     <fragment
@@ -57,6 +64,17 @@
             android:id="@+id/action_sensorsFragment_to_mainpageFragment"
             app:destination="@id/mainpageFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/serviceFragment"
+        android:name="com.example.stargazers.ui.service.ServiceFragment"
+        android:label="fragment_service"
+        tools:layout="@layout/fragment_service" />
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="com.example.stargazers.ui.contacts.ContactsFragment"
+        android:label="fragment_contacts"
+        tools:layout="@layout/fragment_contacts" />
 
 
 </navigation>

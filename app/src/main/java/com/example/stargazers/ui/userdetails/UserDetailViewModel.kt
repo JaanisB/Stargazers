@@ -24,6 +24,16 @@ class UserDetailViewModel @Inject constructor
 
 
 
+
+
+
+
+
+
+
+
+
+
 }
 
 

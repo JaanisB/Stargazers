@@ -10,80 +10,83 @@
             type="com.example.stargazers.ui.userdetails.UserDetailViewModel" />
     </data>
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView0"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="40dp"
-            android:text="USER DETAILS"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/main_photo_image"
-            app:layout_constraintEnd_toEndOf="parent"
-/>
+            android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/main_photo_image"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="60dp"
-            android:scaleType="centerCrop"
-            app:imageUrl="@{viewModel.selectedUser.imgSrcUrl}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView0"
-            tools:src="@tools:sample/backgrounds/scenic" />
+            <TextView
+                android:id="@+id/textView0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="User Details"
+                android:textSize="40dp"
+                app:layout_constraintBottom_toTopOf="@id/main_photo_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@{` Username: ` + viewModel.selectedUser.login}"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/main_photo_image"
-            tools:text="Username: " />
+            <ImageView
+                android:id="@+id/main_photo_image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="60dp"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{viewModel.selectedUser.imgSrcUrl}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView0"
+                tools:src="@tools:sample/backgrounds/scenic" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@{` User ID: ` + Integer.toString(viewModel.selectedUser.id)}"
-            app:layout_constraintTop_toBottomOf="@id/textView"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="User ID " />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@{` Username: ` + viewModel.selectedUser.login}"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_photo_image"
+                tools:text="Username: " />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@{` User type: ` + viewModel.selectedUser.type}"
-            app:layout_constraintTop_toBottomOf="@id/textView2"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="User type: " />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@{` User ID: ` + Integer.toString(viewModel.selectedUser.id)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView"
+                tools:text="User ID " />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@{` Site admin: ` + viewModel.selectedUser.siteAdmin}"
-            app:layout_constraintTop_toBottomOf="@id/textView3"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="Site admin" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@{` User type: ` + viewModel.selectedUser.type}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView2"
+                tools:text="User type: " />
 
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@{` Site admin: ` + viewModel.selectedUser.siteAdmin}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView3"
+                tools:text="Site admin" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </layout>
 
 

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="contact"
+            type="com.example.stargazers.model.Contact" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txt_contact_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8sp"
+            android:text="@{contact.id}"
+            android:textAlignment="textStart"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Contact id" />
+
+        <TextView
+            android:id="@+id/txt_contact_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8sp"
+            android:text="@{contact.name}"
+            android:textAlignment="textEnd"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Contact name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

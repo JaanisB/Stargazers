@@ -44,13 +44,14 @@ class MainpageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.btnViewAllUsers.setOnClickListener {
             viewModel.getUserList()
             Navigation.findNavController(binding.root)
-                .navigate(R.id.action_userDetailsFragment_to_mainPageFragment)
+                .navigate(R.id.action_mainpageFragment_to_usersFragment)
         }
 
         binding.btnSensorData.setOnClickListener {
@@ -58,33 +59,15 @@ class MainpageFragment : Fragment() {
                 .navigate(R.id.action_mainpageFragment_to_sensorsFragment)
         }
 
-        // Observe ViewModel users and bind that data to dropdown menu
-        viewModel.users.observe(viewLifecycleOwner, { users ->
-            binding.autoCompleteTextView.setAdapter(
-                ArrayAdapter(
-                    requireContext(),
-                    R.layout.mainmenu_dropdown_item,
-                    users.map {
-                        it.login
-                    })
-            )
-        }
-        )
-
-        binding.btnViewSelectedUser.setOnClickListener {
-            viewModel.getUserByLogin(binding.autoCompleteTextView.onItemClickListener.toString())
+        binding.btnService.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_mainpageFragment_to_serviceFragment)
         }
 
-        // binding.autoCompleteTextView.setOnItemClickListener { adapterView, view, i, l ->  }
-
-        viewModel.navigateToSelectedUser.observe(viewLifecycleOwner, {
-            if (null != it) {
-                this.findNavController().navigate(
-                    UsersFragmentDirections.actionUsersFragmentToUserDetailsFragment(it)
-                )
-                viewModel.displayUserDetailsComplete()
-            }
-        })
+        binding.btnGetcontacts.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_mainpageFragment_to_contactsFragment)
+        }
 
     }
 
